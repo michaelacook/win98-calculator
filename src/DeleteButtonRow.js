@@ -6,8 +6,8 @@ class DeleteButtonRow extends Component {
     return (
       <div>
         <span className="box"></span>
-        <DeleteButton value={"Backspace"} />
-        <DeleteButton value={"CE"} />
+        <DeleteButton keyFunction={this.props.backSpace} value={"Backspace"} />
+        <DeleteButton keyFunction={this.props.backSpace} value={"CE"} />
         <DeleteButton keyFunction={this.props.clearDisplay} value={"C"} />
       </div>
     );

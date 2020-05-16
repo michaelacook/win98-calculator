@@ -27,6 +27,7 @@ class App extends Component {
           display={this.state.display}
           printNumber={this.printNumber}
           clearDisplay={this.clearDisplay}
+          backSpace={this.backSpace}
         />
       </div>
     );
@@ -38,6 +39,24 @@ class App extends Component {
   clearDisplay = () => {
     this.setState({ display: "0" });
   };
+
+  /**
+   * Delete the last number entered
+   */
+  backSpace = () => {
+      if (this.state.display === "0") return;
+      if (this.state.display.length === 1) {
+          return this.setState({ display: "0" });
+      }
+      const newDisplay = this
+        .state
+        .display
+        .substr(
+            0, 
+            this.state.display.length -1
+        );
+      this.setState({ display: newDisplay });
+  }
 
   /**
    * Add a number to the display

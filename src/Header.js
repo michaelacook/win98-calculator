@@ -5,7 +5,7 @@ const Header = () => {
   return (
     <div className="title-bar">
       <div className="title-bar-text">
-        <img id="icon" src={icon} />
+        <img id="icon" src={icon} alt="icon" />
         React Calculator
       </div>
       <div className="title-bar-controls">
