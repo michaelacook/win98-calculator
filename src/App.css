@@ -1,38 +1,100 @@
-.App {
+body {
+  background-color: #22807f;
+}
+
+table {
+  display: inline-block;
+  border-spacing: 8px;
+}
+
+#display {
+  width: 98%;
+  height: 25px;
+  text-align: end;
+  margin-bottom: 9px;
+}
+
+#icon {
+  width: 12px;
+  margin-right: 4px;
+}
+
+#options {
+  margin-top: 5px;
+}
+
+.main-grid {
+  margin-top: 8px;
+}
+
+.box {
+  display: inline-block;
+  box-shadow: inset -1px -1px #0a0a0a, inset -1px -1px #0a0a0a,
+    inset 1px 1px #fff, inset 1px 1px #fff;
+  width: 30px;
+  height: 30px;
+  vertical-align: bottom;
+  margin-right: 18px;
+  margin-left: 5px;
+  margin-bottom: 3px;
+}
+
+.button-row {
+  display: block;
+  margin-bottom: 7px;
+}
+
+.button-row button {
+  display: inline-block;
+  margin-right: 4px;
+}
+
+.button-row button:first-child {
+  margin-right: 15px;
+}
+
+.main-button {
+  min-width: 20px;
+  min-height: 30px;
+  width: 38px;
+}
+
+.window {
+  width: 280px;
+  margin-top: 20px;
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+.options {
+  margin-top: 10px;
+}
+
+.options span {
+  display: inline;
+  margin-left: 8px;
+}
+
+/* .memory-buttons-grid {
+    display: inline-block;
+} */
+
+.memory-button {
+  display: block;
   text-align: center;
+  color: red;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.delete-button {
+  padding: 0;
+  display: inline-block;
+  min-width: 50px;
+  min-height: 35px;
+  width: 65px;
+  text-align: center;
+  color: red;
+  margin-right: 5px;
+  margin-bottom: 3px;
 }
