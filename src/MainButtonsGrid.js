@@ -38,7 +38,7 @@ class MainButtonsGrid extends Component {
           <MemoryButton value={"M+"} />
           <NumberButton printNumber={this.props.printNumber} value={0} />
           <FunctionButton value={"+/-"} />
-          <FunctionButton value={"."} />
+          <FunctionButton keyFunction={this.props.setFloatState} value={"."} />
           <FunctionButton value={"+"} />
           <FunctionButton value={"="} />
         </div>

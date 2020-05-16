@@ -9,7 +9,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      display: "0",
+      display: "0.",
       int: true,
       float: false,
     };
@@ -28,35 +28,45 @@ class App extends Component {
           printNumber={this.printNumber}
           clearDisplay={this.clearDisplay}
           backSpace={this.backSpace}
+          setFloatState={this.setFloatState}
         />
       </div>
     );
   }
 
   /**
+   * Set the state of the application to handle floats
+   * Used when the user clicks the "." (decimal) button
+   */
+  setFloatState = () => {
+    this.setState({
+      int: false,
+      float: true,
+    });
+  };
+
+  /**
    * Clear the display
    */
   clearDisplay = () => {
-    this.setState({ display: "0" });
+    this.setState({ display: "0." });
   };
 
   /**
    * Delete the last number entered
    */
   backSpace = () => {
+    if (this.state.int) {
       if (this.state.display === "0") return;
-      if (this.state.display.length === 1) {
-          return this.setState({ display: "0" });
+      if (this.state.display.length === 2) {
+        return this.setState({ display: "0." });
       }
-      const newDisplay = this
-        .state
-        .display
-        .substr(
-            0, 
-            this.state.display.length -1
-        );
-      this.setState({ display: newDisplay });
-  }
+      let newDisplay = this.state.display.split("");
+      newDisplay.pop();
+      newDisplay = newDisplay.slice(0, -1).join("");
+      this.setState({ display: `${newDisplay}.` });
+    }
+  };
 
   /**
    * Add a number to the display
@@ -71,13 +81,16 @@ class App extends Component {
       return this.setState({ display: "Error" });
     }
     if (this.state.int) {
-      if (this.state.display === "0") {
+      if (this.state.display === "0.") {
         this.setState((prevState) => ({
-          display: `${num}`,
+          display: `${num}.`,
         }));
       } else {
         this.setState((prevState) => ({
-          display: `${prevState.display}${num}`,
+          display: `${prevState.display.substr(
+            0,
+            prevState.display.length - 1
+          )}${num}.`,
         }));
       }
     }

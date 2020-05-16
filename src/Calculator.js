@@ -10,11 +10,14 @@ class Calculator extends Component {
     return (
       <div className="window-body body">
         <Display display={this.props.display} />
-        <DeleteButtonRow 
-         clearDisplay={this.props.clearDisplay} 
-         backSpace={this.props.backSpace}
+        <DeleteButtonRow
+          clearDisplay={this.props.clearDisplay}
+          backSpace={this.props.backSpace}
         />
-        <MainButtonsGrid printNumber={this.props.printNumber} />
+        <MainButtonsGrid
+          printNumber={this.props.printNumber}
+          setFloatState={this.props.setFloatState}
+        />
       </div>
     );
   }
