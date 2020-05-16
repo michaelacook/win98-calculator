@@ -1,5 +1,5 @@
-import React from "react";
-import icon from "./icon.png";
+import React from "react"
+import icon from "./icon.png"
 
 const Header = () => {
   return (
@@ -14,7 +14,7 @@ const Header = () => {
         <button aria-label="Close"></button>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header

@@ -1,9 +1,9 @@
 /* body of the window containing calculator components */
 
-import Display from "./Display";
-import React, { Component } from "react";
-import DeleteButtonRow from "./DeleteButtonRow";
-import MainButtonsGrid from "./MainButtonsGrid";
+import Display from "./Display"
+import React, { Component } from "react"
+import DeleteButtonRow from "./DeleteButtonRow"
+import MainButtonsGrid from "./MainButtonsGrid"
 
 class Calculator extends Component {
   render() {
@@ -19,8 +19,8 @@ class Calculator extends Component {
           setFloatState={this.props.setFloatState}
         />
       </div>
-    );
+    )
   }
 }
 
-export default Calculator;
+export default Calculator

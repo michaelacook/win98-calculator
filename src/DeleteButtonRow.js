@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import DeleteButton from "./DeleteButton";
+import React, { Component } from "react"
+import DeleteButton from "./DeleteButton"
 
 class DeleteButtonRow extends Component {
   render() {
@@ -10,8 +10,8 @@ class DeleteButtonRow extends Component {
         <DeleteButton keyFunction={this.props.backSpace} value={"CE"} />
         <DeleteButton keyFunction={this.props.clearDisplay} value={"C"} />
       </div>
-    );
+    )
   }
 }
 
-export default DeleteButtonRow;
+export default DeleteButtonRow

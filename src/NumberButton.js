@@ -1,4 +1,4 @@
-import React from "react";
+import React from "react"
 
 const NumberButton = (props) => {
   return (
@@ -9,7 +9,7 @@ const NumberButton = (props) => {
     >
       {props.value}
     </button>
-  );
-};
+  )
+}
 
-export default NumberButton;
+export default NumberButton

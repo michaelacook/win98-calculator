@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import FunctionButton from "./FunctionButton";
-import NumberButton from "./NumberButton";
-import MemoryButton from "./MemoryButton";
+import React, { Component } from "react"
+import FunctionButton from "./FunctionButton"
+import NumberButton from "./NumberButton"
+import MemoryButton from "./MemoryButton"
 
 class MainButtonsGrid extends Component {
   render() {
@@ -43,8 +43,8 @@ class MainButtonsGrid extends Component {
           <FunctionButton value={"="} />
         </div>
       </div>
-    );
+    )
   }
 }
 
-export default MainButtonsGrid;
+export default MainButtonsGrid

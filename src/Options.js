@@ -1,6 +1,6 @@
 /* unfortunately not functional at the time, just for show */
 
-import React from "react";
+import React from "react"
 
 const Options = () => {
   return (
@@ -11,7 +11,7 @@ const Options = () => {
         <span className="underline">H</span>elp
       </span>
     </div>
-  );
-};
+  )
+}
 
-export default Options;
+export default Options
