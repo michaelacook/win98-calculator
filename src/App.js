@@ -28,12 +28,13 @@ class App extends Component {
           printNumber={this.printNumber}
           clearDisplay={this.clearDisplay}
           backSpace={this.backSpace}
-          setFloatState={this.setFloatState}
+          addDecimal={this.addDecimal}
           compute={this.compute}
           addition={this.addition}
           subtraction={this.subtraction}
           multiplication={this.multiplication}
           division={this.division}
+          squareRoot={this.squareRoot}
         />
       </div>
     )
@@ -61,6 +62,32 @@ class App extends Component {
   }
 
   /**
+   * Set int or float depending on whether contains a decimal
+   */
+  toggleNumberType = () => {
+    if (this.state.display.includes(".")) {
+      this.setFloatState();
+    } else {
+      this.setIntState();
+    }
+  }
+
+  /**
+   * Check if display is a number type and if so convert to string
+   * Call toggleNumberType to set application state accordingly
+   * This is necessary as the application uses strings rather than numbers 
+   * for convenience as strings are easier to manipulate
+   */
+  checkNumberType = () => {
+    if (typeof this.state.display == "number") {
+      const strNum = this.state.display.toString();
+      this.setState({ display: strNum }, () => this.toggleNumberType())
+    } else {
+      this.toggleNumberType();
+    }
+  }
+
+  /**
    * Clear the display
    */
   clearDisplay = () => {
@@ -69,40 +96,21 @@ class App extends Component {
   }
 
   /**
-   * Backspace a whole number
-   */
-  backSpaceInt = () => {
-    if (this.state.display.length === 2) {
-      return this.setState({ display: "0." })
-    }
-    let newDisplay = this.state.display.split("")
-    newDisplay.pop()
-    newDisplay = newDisplay.slice(0, -1).join("")
-    this.setState({ display: `${newDisplay}.` })
-  }
-
-  /**
-   * Backspace a floating point number
-   */
-  backSpaceFloat = () => {
-    if (this.state.display[this.state.display.length - 1] === ".") {
-      this.setIntState()
-      return this.backSpaceInt()
-    }
-    const newDisplay = this.state.display.slice(0, -1)
-    this.setState({ display: newDisplay })
-  }
-
-  /**
-   * Delete the last number entered
+   * Backspace a last number
    */
   backSpace = () => {
     if (this.state.display === "0." || this.state.display === "Error") return
-    if (this.state.int) {
-      this.backSpaceInt()
-    } else if (this.state.float) {
-      this.backSpaceFloat()
+    let newDisplay;
+    if (this.state.display.length === 1) {
+      newDisplay = "0.";
+    } else {
+      newDisplay = this.state.display.substr(0, this.state.display.length - 1)
     }
+    this.setState({ display: `${newDisplay}` }, () => {
+      if (this.state.display !== "0.") {
+        this.checkNumberType();
+      }
+    })
   }
 
   /**
@@ -117,33 +125,37 @@ class App extends Component {
     if (this.state.display.length >= 40) {
       return this.setState({ display: "Error" })
     }
-    if (this.state.int) {
-      if (this.state.display === "0.") {
-        this.setState((prevState) => ({
-          display: `${num}.`,
-        }))
-      } else {
-        this.setState((prevState) => ({
-          display: `${prevState.display.substr(
-            0,
-            prevState.display.length - 1
-          )}${num}.`,
-        }))
-      }
-    } else if (this.state.float) {
+    if (this.state.display == "0." || this.state.display == "0") {
       this.setState((prevState) => ({
-        display: `${prevState.display}${num}`,
+        display: `${num}`,
+      }))
+    } else {
+      this.setState((prevState) => ({
+        display: `${prevState.display}${num}`
       }))
     }
   }
 
   /**
+   * Determine if a number if floating point of not
+   * @param {String} num - number string
+   */
+  isFloat = num => !Number.isInteger(eval(num));
+
+  /**
    * Evaluate arithemtic expression and display result
    */
   compute = () => {
+    this.setState({
+      display: eval(this.state.display)
+    }, () => this.checkNumberType());
+  }
+
+  addDecimal = () => {
+    this.setFloatState();
     this.setState(prevState => ({
-      display: eval(prevState.display)
-    }));
+      display: `${prevState.display}.`
+    }))
   }
 
   /**
@@ -180,6 +192,16 @@ class App extends Component {
     this.setState(prevState => ({
       display: `${prevState.display}/ `
     }));
+  }
+
+  /**
+   * Get square root of display 
+   * If display is an arithmetic expression the square root of the evaluated expression will be given
+   */
+  squareRoot = () => {
+    this.setState({
+      display: Math.sqrt(eval(this.state.display))
+    }, () => this.checkNumberType());
   }
 }
 

@@ -13,7 +13,7 @@ class MainButtonsGrid extends Component {
           <NumberButton printNumber={this.props.printNumber} value={8} />
           <NumberButton printNumber={this.props.printNumber} value={9} />
           <FunctionButton keyFunction={this.props.division} value={"/"} />
-          <FunctionButton value={"sqrt"} />
+          <FunctionButton keyFunction={this.props.squareRoot} value={"sqrt"} />
         </div>
 
         <div className="button-row">
@@ -38,7 +38,7 @@ class MainButtonsGrid extends Component {
           <MemoryButton value={"M+"} />
           <NumberButton printNumber={this.props.printNumber} value={0} />
           <FunctionButton value={"+/-"} />
-          <FunctionButton keyFunction={this.props.setFloatState} value={"."} />
+          <FunctionButton keyFunction={this.props.addDecimal} value={"."} />
           <FunctionButton keyFunction={this.props.addition} value={"+"} />
           <FunctionButton keyFunction={this.props.compute} value={"="} />
         </div>
