@@ -17,6 +17,11 @@ class Calculator extends Component {
         <MainButtonsGrid
           printNumber={this.props.printNumber}
           setFloatState={this.props.setFloatState}
+          compute={this.props.compute}
+          addition={this.props.addition}
+          subtraction={this.props.subtraction}
+          multiplication={this.props.multiplication}
+          division={this.props.division}
         />
       </div>
     )

@@ -29,6 +29,11 @@ class App extends Component {
           clearDisplay={this.clearDisplay}
           backSpace={this.backSpace}
           setFloatState={this.setFloatState}
+          compute={this.compute}
+          addition={this.addition}
+          subtraction={this.subtraction}
+          multiplication={this.multiplication}
+          division={this.division}
         />
       </div>
     )
@@ -130,6 +135,51 @@ class App extends Component {
         display: `${prevState.display}${num}`,
       }))
     }
+  }
+
+  /**
+   * Evaluate arithemtic expression and display result
+   */
+  compute = () => {
+    this.setState(prevState => ({
+      display: eval(prevState.display)
+    }));
+  }
+
+  /**
+   * Add the addition operator to display
+   */
+  addition = () => {
+    this.setState(prevState => ({
+      display: `${prevState.display}+ `
+    }));
+  }
+
+  /**
+   * Add the subtraction operator to display
+   */
+  subtraction = () => {
+    this.setState(prevState => ({
+      display: `${prevState.display}- `
+    }));
+  }
+
+  /**
+   * Add the multiplication operator to display
+   */
+  multiplication = () => {
+    this.setState(prevState => ({
+      display: `${prevState.display}* `
+    }));
+  }
+
+  /**
+   * Add the division operator to display 
+   */
+  division = () => {
+    this.setState(prevState => ({
+      display: `${prevState.display}/ `
+    }));
   }
 }
 
