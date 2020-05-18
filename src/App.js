@@ -37,6 +37,7 @@ class App extends Component {
           division={this.division}
           squareRoot={this.squareRoot}
           percent={this.percent}
+          reciprocal={this.reciprocal}
         />
       </div>
     )
@@ -146,7 +147,7 @@ class App extends Component {
    */
   updateExpression = (str) => {
     const { expression } = this.state
-    const operators = ["+", "-", "\\", "*", "%"]
+    const operators = ["+", "-", "/", "*", "%"]
     if (typeof str === "number") str = str.toString()
     if (
       operators.includes(str) ||
@@ -178,10 +179,13 @@ class App extends Component {
    */
   compute = () => {
     const result = eval(this.state.expression.join(""))
+    if (isNaN(result)) {
+      this.setState({ display: "Error" })
+      return this.clearExpression()
+    }
     this.setState(
       {
         display: result,
-        expression: [""],
       },
       () => {
         this.clearExpression(result)
@@ -254,18 +258,6 @@ class App extends Component {
   }
 
   /**
-   * Get square root of display
-   * If display is an arithmetic expression the square root of the evaluated expression will be given
-   */
-  squareRoot = () => {
-    const sqrt = Math.sqrt(this.state.expression.join(""))
-    this.setState({ display: sqrt }, () => {
-      this.clearExpression(sqrt)
-      this.checkNumberType()
-    })
-  }
-
-  /**
    * Process an expression string containing percentages
    * Called when the user adds a percent sign
    */
@@ -281,6 +273,29 @@ class App extends Component {
       expression.splice(percentOperatorIndex, 1)
       this.setState({ expression: expression })
     }
+  }
+
+  /**
+   * Compute the square root of the current expression
+   */
+  squareRoot = () => {
+    const sqrt = Math.sqrt(this.state.expression.join(""))
+    this.setState({ display: sqrt }, () => {
+      this.clearExpression(sqrt)
+      this.checkNumberType()
+    })
+  }
+
+  /**
+   * Compute the reciprocal of the current expression
+   */
+  reciprocal = () => {
+    const exp = this.state.expression.join("")
+    const recip = eval(`1/ (${eval(exp)})`)
+    this.setState({ display: recip }, () => {
+      this.clearExpression(recip)
+      this.checkNumberType()
+    })
   }
 }
 

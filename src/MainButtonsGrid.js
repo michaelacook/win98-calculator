@@ -33,7 +33,7 @@ class MainButtonsGrid extends Component {
           <NumberButton printNumber={this.props.printNumber} value={2} />
           <NumberButton printNumber={this.props.printNumber} value={3} />
           <FunctionButton keyFunction={this.props.subtraction} value={"-"} />
-          <FunctionButton value={"1/x"} />
+          <FunctionButton keyFunction={this.props.reciprocal} value={"1/x"} />
         </div>
 
         <div className="button-row">
