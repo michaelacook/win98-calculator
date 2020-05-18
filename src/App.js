@@ -199,6 +199,7 @@ class App extends Component {
    * Add the decimal operator to display
    */
   addDecimal = () => {
+    if (this.state.expression[this.state.expression.length - 1] === "") return
     this.setFloatState()
     this.setState((prevState) => ({
       display: `${prevState.display}.`,
@@ -210,6 +211,7 @@ class App extends Component {
    * Add the addition operator to display
    */
   addition = () => {
+    if (this.state.expression[this.state.expression.length - 1] === "") return
     this.setState((prevState) => ({
       display: `${prevState.display}+`,
     }))
@@ -220,6 +222,7 @@ class App extends Component {
    * Add the subtraction operator to display
    */
   subtraction = () => {
+    if (this.state.expression[this.state.expression.length - 1] === "") return
     this.setState((prevState) => ({
       display: `${prevState.display}-`,
     }))
@@ -230,6 +233,7 @@ class App extends Component {
    * Add the multiplication operator to display
    */
   multiplication = () => {
+    if (this.state.expression[this.state.expression.length - 1] === "") return
     this.setState((prevState) => ({
       display: `${prevState.display}*`,
     }))
@@ -240,6 +244,7 @@ class App extends Component {
    * Add the division operator to display
    */
   division = () => {
+    if (this.state.expression[this.state.expression.length - 1] === "") return
     this.setState((prevState) => ({
       display: `${prevState.display}/`,
     }))

@@ -1,3 +1,17 @@
+/* custom styles for calculator */
+
+/* this rule is just to easily make the
+calculator bigger while still in proportion.
+I didn't feel like messing with all the width 
+and height values so this is a simple 
+but non-ideal fix */
+html {
+  zoom: 1.75;
+  transform-origin: 0 0;
+  -moz-transform: scale(1.75);
+  -moz-transform-origin: 0 0;
+}
+
 body {
   background-color: #22807f;
 }
