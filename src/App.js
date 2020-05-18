@@ -309,7 +309,7 @@ class App extends Component {
     let newNum
     if (operators.includes(lastNum) || lastNum === "" || lastNum === "0") return
     if (lastNum < 0) {
-      newNum = eval(`1*${lastNum}`).toString()
+      newNum = eval(`${Math.abs(lastNum)}`).toString()
     } else if (lastNum > 0) {
       newNum = eval(`-1*${lastNum}`).toString()
     }
