@@ -14,6 +14,7 @@ class App extends Component {
       int: true,
       float: false,
     }
+    this.operators = ["+", "-", "/", "*", "%"];
   }
 
   /**
@@ -101,9 +102,43 @@ class App extends Component {
   }
 
   /**
-   * Backspace a last number
+   * Backspace last entry to the current expression
    */
-  backSpace = () => {
+  backSpaceExpression = () => {
+    const { expression } = this.state;
+    const lastEntered = expression[expression.length-1];
+    if (lastEntered.length === 1) {
+      if (expression.length === 1) {
+        return this.clearExpression();
+      } else {
+        expression.pop();
+        return this.setState({ expression: expression });
+      }
+    } else if (
+      lastEntered.length === 2 &&
+      lastEntered[0] === "-" 
+      ) {
+        if (expression.length === 1) {
+          return this.clearExpression();
+        } else {
+          expression.pop();
+        }
+      } else if (lastEntered.length > 1) {
+        let newLast = lastEntered.split("");
+        newLast.pop();
+        newLast = newLast.join("");
+        expression.pop();
+        expression.push(newLast);
+      }
+      this.setState({ expression: expression });
+  }
+
+  /**
+   * Backspace the calculator display
+   * @return {String} newDisplay - new string to be displayed
+   * return value used by clearExpression
+   */
+  backSpaceDisplay = () => {
     if (this.state.display === "0." || this.state.display === "Error") return
     let newDisplay
     if (this.state.display.length === 1) {
@@ -116,6 +151,16 @@ class App extends Component {
         this.checkNumberType()
       }
     })
+    return newDisplay;
+  }
+
+  /**
+   * Backspace last entry
+   */
+  backSpace = () => {
+    const newDisplay = this.backSpaceDisplay();
+    this.clearExpression(newDisplay);
+    this.backSpaceExpression();
   }
 
   /**
@@ -148,11 +193,10 @@ class App extends Component {
    */
   updateExpression = (str) => {
     const { expression } = this.state
-    const operators = ["+", "-", "/", "*", "%"]
     if (typeof str === "number") str = str.toString()
     if (
-      operators.includes(str) ||
-      operators.includes(this.state.display[this.state.display.length - 1])
+      this.operators.includes(str) ||
+      this.operators.includes(this.state.display[this.state.display.length - 1])
     ) {
       expression.push(str)
     } else {
@@ -179,6 +223,7 @@ class App extends Component {
    * in this calculator is clearly not sensitive
    */
   compute = () => {
+    if (this.operators.includes(this.state.expression[this.state.expression.length -1])) return;
     const result = eval(this.state.expression.join(""))
     if (isNaN(result)) {
       this.setState({ display: "Error" })
@@ -310,9 +355,8 @@ class App extends Component {
   toggleNegative = () => {
     const { expression } = this.state
     const lastNum = expression[expression.length - 1]
-    const operators = ["+", "-", "/", "*", "%"]
     let newNum
-    if (operators.includes(lastNum) || lastNum === "" || lastNum === "0") return
+    if (this.operators.includes(lastNum) || lastNum === "" || lastNum === "0") return
     if (lastNum < 0) {
       newNum = eval(`${Math.abs(lastNum)}`).toString()
     } else if (lastNum > 0) {
