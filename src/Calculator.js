@@ -23,6 +23,7 @@ class Calculator extends Component {
           multiplication={this.props.multiplication}
           division={this.props.division}
           squareRoot={this.props.squareRoot}
+          percent={this.props.percent}
         />
       </div>
     )

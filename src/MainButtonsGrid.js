@@ -1,3 +1,5 @@
+/* main calculator buttons grid */
+
 import React, { Component } from "react"
 import FunctionButton from "./FunctionButton"
 import NumberButton from "./NumberButton"
@@ -22,7 +24,7 @@ class MainButtonsGrid extends Component {
           <NumberButton printNumber={this.props.printNumber} value={5} />
           <NumberButton printNumber={this.props.printNumber} value={6} />
           <FunctionButton keyFunction={this.props.multiplication} value={"*"} />
-          <FunctionButton value={"%"} />
+          <FunctionButton keyFunction={this.props.percent} value={"%"} />
         </div>
 
         <div className="button-row">

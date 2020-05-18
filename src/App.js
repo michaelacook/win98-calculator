@@ -10,6 +10,7 @@ class App extends Component {
     super(props)
     this.state = {
       display: "0.",
+      expression: [""],
       int: true,
       float: false,
     }
@@ -35,6 +36,7 @@ class App extends Component {
           multiplication={this.multiplication}
           division={this.division}
           squareRoot={this.squareRoot}
+          percent={this.percent}
         />
       </div>
     )
@@ -65,25 +67,25 @@ class App extends Component {
    * Set int or float depending on whether contains a decimal
    */
   toggleNumberType = () => {
-    if (this.state.display.includes(".")) {
-      this.setFloatState();
+    if (this.state.expression.join("").includes(".")) {
+      this.setFloatState()
     } else {
-      this.setIntState();
+      this.setIntState()
     }
   }
 
   /**
    * Check if display is a number type and if so convert to string
    * Call toggleNumberType to set application state accordingly
-   * This is necessary as the application uses strings rather than numbers 
+   * This is necessary as the application uses strings rather than numbers
    * for convenience as strings are easier to manipulate
    */
   checkNumberType = () => {
     if (typeof this.state.display == "number") {
-      const strNum = this.state.display.toString();
+      const strNum = this.state.display.toString()
       this.setState({ display: strNum }, () => this.toggleNumberType())
     } else {
-      this.toggleNumberType();
+      this.toggleNumberType()
     }
   }
 
@@ -92,6 +94,7 @@ class App extends Component {
    */
   clearDisplay = () => {
     this.setState({ display: "0." })
+    this.clearExpression()
     this.setIntState()
   }
 
@@ -100,15 +103,15 @@ class App extends Component {
    */
   backSpace = () => {
     if (this.state.display === "0." || this.state.display === "Error") return
-    let newDisplay;
+    let newDisplay
     if (this.state.display.length === 1) {
-      newDisplay = "0.";
+      newDisplay = "0."
     } else {
       newDisplay = this.state.display.substr(0, this.state.display.length - 1)
     }
     this.setState({ display: `${newDisplay}` }, () => {
       if (this.state.display !== "0.") {
-        this.checkNumberType();
+        this.checkNumberType()
       }
     })
   }
@@ -122,7 +125,9 @@ class App extends Component {
     if (this.state.display === "Error") {
       this.setState({ display: "" })
     }
+    this.updateExpression(num)
     if (this.state.display.length >= 40) {
+      this.clearExpression()
       return this.setState({ display: "Error" })
     }
     if (this.state.display == "0." || this.state.display == "0") {
@@ -131,77 +136,151 @@ class App extends Component {
       }))
     } else {
       this.setState((prevState) => ({
-        display: `${prevState.display}${num}`
+        display: `${prevState.display}${num}`,
       }))
     }
   }
 
   /**
-   * Determine if a number if floating point of not
-   * @param {String} num - number string
+   * Add number or operator to expression array in state
    */
-  isFloat = num => !Number.isInteger(eval(num));
+  updateExpression = (str) => {
+    const { expression } = this.state
+    const operators = ["+", "-", "\\", "*", "%"]
+    if (typeof str === "number") str = str.toString()
+    if (
+      operators.includes(str) ||
+      operators.includes(this.state.display[this.state.display.length - 1])
+    ) {
+      expression.push(str)
+    } else {
+      expression[expression.length - 1] += str
+    }
+    this.setState({ expression: expression })
+  }
+
+  /**
+   * Reset expression state array
+   * @param {String} newExp - string to replace old expression
+   */
+  clearExpression = (newExp = "") => {
+    if (typeof newExp === "number") newExp = newExp.toString()
+    this.setState((prevState) => ({
+      expression: [newExp],
+    }))
+  }
 
   /**
    * Evaluate arithemtic expression and display result
+   * Uses eval even though this function is considered dangerous
+   * Eval is dangerous when using on sensitive data, but the data
+   * in this calculator is clearly not sensitive
    */
   compute = () => {
-    this.setState({
-      display: eval(this.state.display)
-    }, () => this.checkNumberType());
+    const result = eval(this.state.expression.join(""))
+    this.setState(
+      {
+        display: result,
+        expression: [""],
+      },
+      () => {
+        this.clearExpression(result)
+        this.checkNumberType()
+      }
+    )
   }
 
+  /**
+   * Add the decimal operator to display
+   */
   addDecimal = () => {
-    this.setFloatState();
-    this.setState(prevState => ({
-      display: `${prevState.display}.`
+    this.setFloatState()
+    this.setState((prevState) => ({
+      display: `${prevState.display}.`,
     }))
+    this.updateExpression(".")
   }
 
   /**
    * Add the addition operator to display
    */
   addition = () => {
-    this.setState(prevState => ({
-      display: `${prevState.display}+ `
-    }));
+    this.setState((prevState) => ({
+      display: `${prevState.display}+`,
+    }))
+    this.updateExpression("+")
   }
 
   /**
    * Add the subtraction operator to display
    */
   subtraction = () => {
-    this.setState(prevState => ({
-      display: `${prevState.display}- `
-    }));
+    this.setState((prevState) => ({
+      display: `${prevState.display}-`,
+    }))
+    this.updateExpression("-")
   }
 
   /**
    * Add the multiplication operator to display
    */
   multiplication = () => {
-    this.setState(prevState => ({
-      display: `${prevState.display}* `
-    }));
+    this.setState((prevState) => ({
+      display: `${prevState.display}*`,
+    }))
+    this.updateExpression("*")
   }
 
   /**
-   * Add the division operator to display 
+   * Add the division operator to display
    */
   division = () => {
-    this.setState(prevState => ({
-      display: `${prevState.display}/ `
-    }));
+    this.setState((prevState) => ({
+      display: `${prevState.display}/`,
+    }))
+    this.updateExpression("/")
   }
 
   /**
-   * Get square root of display 
+   * Add the percent operator to display
+   */
+  percent = () => {
+    if (this.state.display.includes("%")) return
+    this.setState((prevState) => ({
+      display: `${prevState.display}%`,
+    }))
+    this.updateExpression("%")
+    this.computePercent()
+  }
+
+  /**
+   * Get square root of display
    * If display is an arithmetic expression the square root of the evaluated expression will be given
    */
   squareRoot = () => {
-    this.setState({
-      display: Math.sqrt(eval(this.state.display))
-    }, () => this.checkNumberType());
+    const sqrt = Math.sqrt(this.state.expression.join(""))
+    this.setState({ display: sqrt }, () => {
+      this.clearExpression(sqrt)
+      this.checkNumberType()
+    })
+  }
+
+  /**
+   * Process an expression string containing percentages
+   * Called when the user adds a percent sign
+   */
+  computePercent = () => {
+    if (this.state.expression.includes("%")) {
+      const { expression } = this.state
+      const percentOperatorIndex = expression.indexOf("%")
+      const secondNum = expression[percentOperatorIndex - 1]
+      const secondNumIndex = expression.indexOf(secondNum)
+      const firstNum = expression[percentOperatorIndex - 3]
+      const percentage = eval((secondNum / 100) * firstNum).toString()
+      expression.splice(secondNumIndex, 1, percentage)
+      expression.splice(percentOperatorIndex, 1)
+      this.setState({ expression: expression })
+    }
   }
 }
 
