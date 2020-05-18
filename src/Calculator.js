@@ -25,6 +25,7 @@ class Calculator extends Component {
           squareRoot={this.props.squareRoot}
           percent={this.props.percent}
           reciprocal={this.props.reciprocal}
+          toggleNegative={this.props.toggleNegative}
         />
       </div>
     )

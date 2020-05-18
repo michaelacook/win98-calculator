@@ -38,6 +38,7 @@ class App extends Component {
           squareRoot={this.squareRoot}
           percent={this.percent}
           reciprocal={this.reciprocal}
+          toggleNegative={this.toggleNegative}
         />
       </div>
     )
@@ -296,6 +297,25 @@ class App extends Component {
       this.clearExpression(recip)
       this.checkNumberType()
     })
+  }
+
+  /**
+   * Invert the last number in the current expression
+   */
+  toggleNegative = () => {
+    const { expression } = this.state
+    const lastNum = expression[expression.length - 1]
+    const operators = ["+", "-", "/", "*", "%"]
+    let newNum
+    if (operators.includes(lastNum) || lastNum === "" || lastNum === "0") return
+    if (lastNum < 0) {
+      newNum = eval(`1*${lastNum}`).toString()
+    } else if (lastNum > 0) {
+      newNum = eval(`-1*${lastNum}`).toString()
+    }
+    expression.splice(expression.length - 1, 1, newNum)
+    this.setState({ expression: expression })
+    this.setState({ display: expression.join("") })
   }
 }
 

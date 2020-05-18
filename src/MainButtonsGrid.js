@@ -39,7 +39,10 @@ class MainButtonsGrid extends Component {
         <div className="button-row">
           <MemoryButton value={"M+"} />
           <NumberButton printNumber={this.props.printNumber} value={0} />
-          <FunctionButton value={"+/-"} />
+          <FunctionButton
+            keyFunction={this.props.toggleNegative}
+            value={"+/-"}
+          />
           <FunctionButton keyFunction={this.props.addDecimal} value={"."} />
           <FunctionButton keyFunction={this.props.addition} value={"+"} />
           <FunctionButton keyFunction={this.props.compute} value={"="} />
