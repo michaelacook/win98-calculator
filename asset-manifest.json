@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/win98-calculator/static/css/main.bf7d0126.chunk.css",
+    "main.js": "/win98-calculator/static/js/main.88d453dd.chunk.js",
+    "main.js.map": "/win98-calculator/static/js/main.88d453dd.chunk.js.map",
+    "runtime-main.js": "/win98-calculator/static/js/runtime-main.d67e0f11.js",
+    "runtime-main.js.map": "/win98-calculator/static/js/runtime-main.d67e0f11.js.map",
+    "static/css/2.93dac48e.chunk.css": "/win98-calculator/static/css/2.93dac48e.chunk.css",
+    "static/js/2.59f8ab07.chunk.js": "/win98-calculator/static/js/2.59f8ab07.chunk.js",
+    "static/js/2.59f8ab07.chunk.js.map": "/win98-calculator/static/js/2.59f8ab07.chunk.js.map",
+    "index.html": "/win98-calculator/index.html",
+    "precache-manifest.984a6b6faf98df3c195dacdad61c80af.js": "/win98-calculator/precache-manifest.984a6b6faf98df3c195dacdad61c80af.js",
+    "service-worker.js": "/win98-calculator/service-worker.js",
+    "static/css/2.93dac48e.chunk.css.map": "/win98-calculator/static/css/2.93dac48e.chunk.css.map",
+    "static/css/main.bf7d0126.chunk.css.map": "/win98-calculator/static/css/main.bf7d0126.chunk.css.map",
+    "static/js/2.59f8ab07.chunk.js.LICENSE.txt": "/win98-calculator/static/js/2.59f8ab07.chunk.js.LICENSE.txt",
+    "static/media/98.css": "/win98-calculator/static/media/ms_sans_serif_bold.cb1c7473.woff2"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.d67e0f11.js",
+    "static/css/2.93dac48e.chunk.css",
+    "static/js/2.59f8ab07.chunk.js",
+    "static/css/main.bf7d0126.chunk.css",
+    "static/js/main.88d453dd.chunk.js"
+  ]
+}
