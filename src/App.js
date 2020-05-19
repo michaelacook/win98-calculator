@@ -302,7 +302,6 @@ class App extends Component {
    * Add the percent operator to display
    */
   percent = () => {
-    if (this.state.display.includes("%")) return
     this.setState((prevState) => ({
       display: `${prevState.display}%`,
     }))
@@ -317,7 +316,7 @@ class App extends Component {
   computePercent = () => {
     if (this.state.expression.includes("%")) {
       const { expression } = this.state
-      const percentOperatorIndex = expression.indexOf("%")
+      const percentOperatorIndex = expression.lastIndexOf("%")
       const secondNum = expression[percentOperatorIndex - 1]
       const secondNumIndex = expression.indexOf(secondNum)
       const firstNum = expression[percentOperatorIndex - 3]
