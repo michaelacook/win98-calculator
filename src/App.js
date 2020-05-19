@@ -332,7 +332,7 @@ class App extends Component {
    * Compute the square root of the current expression
    */
   squareRoot = () => {
-    const sqrt = Math.sqrt(this.state.expression.join(""))
+    const sqrt = Math.sqrt(eval(this.state.expression.join("")))
     this.setState({ display: sqrt }, () => {
       this.clearExpression(sqrt)
       this.checkNumberType()
