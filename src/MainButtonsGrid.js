@@ -10,7 +10,10 @@ class MainButtonsGrid extends Component {
     return (
       <div className="main-grid">
         <div className="button-row">
-          <MemoryButton value={"MC"} />
+          <MemoryButton
+            keyFunction={this.props.clearMemoryStore}
+            value={"MC"}
+          />
           <NumberButton printNumber={this.props.printNumber} value={7} />
           <NumberButton printNumber={this.props.printNumber} value={8} />
           <NumberButton printNumber={this.props.printNumber} value={9} />
@@ -19,7 +22,10 @@ class MainButtonsGrid extends Component {
         </div>
 
         <div className="button-row">
-          <MemoryButton value={"MR"} />
+          <MemoryButton
+            keyFunction={this.props.retrieveMemoryStore}
+            value={"MR"}
+          />
           <NumberButton printNumber={this.props.printNumber} value={4} />
           <NumberButton printNumber={this.props.printNumber} value={5} />
           <NumberButton printNumber={this.props.printNumber} value={6} />
@@ -28,7 +34,10 @@ class MainButtonsGrid extends Component {
         </div>
 
         <div className="button-row">
-          <MemoryButton value={"MS"} />
+          <MemoryButton
+            keyFunction={this.props.addToMemoryStore}
+            value={"MS"}
+          />
           <NumberButton printNumber={this.props.printNumber} value={1} />
           <NumberButton printNumber={this.props.printNumber} value={2} />
           <NumberButton printNumber={this.props.printNumber} value={3} />
@@ -37,7 +46,10 @@ class MainButtonsGrid extends Component {
         </div>
 
         <div className="button-row">
-          <MemoryButton value={"M+"} />
+          <MemoryButton
+            keyFunction={this.props.addToCurrentMemoryStore}
+            value={"M+"}
+          />
           <NumberButton printNumber={this.props.printNumber} value={0} />
           <FunctionButton
             keyFunction={this.props.toggleNegative}

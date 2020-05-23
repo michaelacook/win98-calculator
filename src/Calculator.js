@@ -26,6 +26,10 @@ class Calculator extends Component {
           percent={this.props.percent}
           reciprocal={this.props.reciprocal}
           toggleNegative={this.props.toggleNegative}
+          addToMemoryStore={this.props.addToMemoryStore}
+          addToCurrentMemoryStore={this.props.addToCurrentMemoryStore}
+          retrieveMemoryStore={this.props.retrieveMemoryStore}
+          clearMemoryStore={this.props.clearMemoryStore}
         />
       </div>
     )

@@ -11,6 +11,7 @@ class App extends Component {
     this.state = {
       display: "0.",
       expression: [""],
+      memory: "",
       int: true,
       float: false,
     }
@@ -40,9 +41,65 @@ class App extends Component {
           percent={this.percent}
           reciprocal={this.reciprocal}
           toggleNegative={this.toggleNegative}
+          addToMemoryStore={this.addToMemoryStore}
+          addToCurrentMemoryStore={this.addToCurrentMemoryStore}
+          clearMemoryStore={this.clearMemoryStore}
+          retrieveMemoryStore={this.retrieveMemoryStore}
         />
       </div>
     )
+  }
+
+  /**
+   * Add number or expression to memory
+   * MS button
+   */
+  addToMemoryStore = () => {
+    const expression = this.state.expression
+    const last = expression[expression.length - 1]
+    if (
+      this.operators.includes(last) ||
+      last === "" ||
+      this.state.memory !== ""
+    ) {
+      return
+    }
+    this.setState({
+      memory: eval(expression.join("")).toString(),
+    })
+  }
+
+  /**
+   * Add a number to the current value in memory store
+   * M+ button
+   */
+  addToCurrentMemoryStore = () => {
+    const expression = this.state.expression
+    const last = expression[expression.length - 1]
+    if (this.state.memory === "" || this.operators.includes(last)) return
+    this.setState((prevState) => ({
+      memory: eval(
+        `${prevState.memory} + ${eval(expression.join(""))}`
+      ).toString(),
+    }))
+  }
+
+  /**
+   * Retrieve and print value in memory store
+   * MR button
+   */
+  retrieveMemoryStore = () => {
+    if (this.state.memory === "") return
+    this.printNumber(this.state.memory)
+    this.checkNumberType()
+  }
+
+  /**
+   * Clear memory store
+   * MC button
+   */
+  clearMemoryStore = () => {
+    this.setState({ memory: "" })
   }
 
   /**
