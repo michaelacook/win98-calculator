@@ -55,8 +55,8 @@ class App extends Component {
    * MS button
    */
   addToMemoryStore = () => {
-    const expression = this.state.expression
-    const last = expression[expression.length - 1]
+    const expression = this.state.expression,
+      last = expression[expression.length - 1]
     if (
       this.operators.includes(last) ||
       last === "" ||
@@ -74,8 +74,8 @@ class App extends Component {
    * M+ button
    */
   addToCurrentMemoryStore = () => {
-    const expression = this.state.expression
-    const last = expression[expression.length - 1]
+    const expression = this.state.expression,
+      last = expression[expression.length - 1]
     if (this.state.memory === "" || this.operators.includes(last)) return
     this.setState((prevState) => ({
       memory: eval(
@@ -162,8 +162,8 @@ class App extends Component {
    * Backspace last entry to the current expression
    */
   backSpaceExpression = () => {
-    const { expression } = this.state
-    const lastEntered = expression[expression.length - 1]
+    const { expression } = this.state,
+      lastEntered = expression[expression.length - 1]
     if (lastEntered.length === 1) {
       if (expression.length === 1) {
         return this.clearExpression()
@@ -372,12 +372,12 @@ class App extends Component {
    */
   computePercent = () => {
     if (this.state.expression.includes("%")) {
-      const { expression } = this.state
-      const percentOperatorIndex = expression.lastIndexOf("%")
-      const secondNum = expression[percentOperatorIndex - 1]
-      const secondNumIndex = expression.indexOf(secondNum)
-      const firstNum = expression[percentOperatorIndex - 3]
-      const percentage = eval((secondNum / 100) * firstNum).toString()
+      const { expression } = this.state,
+        percentOperatorIndex = expression.lastIndexOf("%"),
+        secondNum = expression[percentOperatorIndex - 1],
+        secondNumIndex = expression.indexOf(secondNum),
+        firstNum = expression[percentOperatorIndex - 3],
+        percentage = eval((secondNum / 100) * firstNum).toString()
       expression.splice(secondNumIndex, 1, percentage)
       expression.splice(percentOperatorIndex, 1)
       this.setState({ expression: expression })
@@ -399,8 +399,8 @@ class App extends Component {
    * Compute the reciprocal of the current expression
    */
   reciprocal = () => {
-    const exp = this.state.expression.join("")
-    const recip = eval(`1/ (${eval(exp)})`)
+    const exp = this.state.expression.join(""),
+      recip = eval(`1/ (${eval(exp)})`)
     this.setState({ display: recip }, () => {
       this.clearExpression(recip)
       this.checkNumberType()
@@ -411,8 +411,8 @@ class App extends Component {
    * Invert the last number in the current expression
    */
   toggleNegative = () => {
-    const { expression } = this.state
-    const lastNum = expression[expression.length - 1]
+    const { expression } = this.state,
+      lastNum = expression[expression.length - 1]
     let newNum
     if (this.operators.includes(lastNum) || lastNum === "" || lastNum === "0")
       return
