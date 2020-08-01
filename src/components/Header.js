@@ -6,7 +6,7 @@ const Header = () => {
     <div className="title-bar">
       <div className="title-bar-text">
         <img id="icon" src={icon} alt="icon" />
-        React Calculator
+        Calculator
       </div>
       <div className="title-bar-controls">
         <button aria-label="Minimize"></button>

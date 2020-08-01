@@ -244,6 +244,7 @@ class App extends Component {
 
   /**
    * Add number or operator to expression array in state
+   * @param {String} str - number or character to be added to current expression
    */
   updateExpression = (str) => {
     const { expression } = this.state
@@ -300,59 +301,50 @@ class App extends Component {
   }
 
   /**
+   * Add passed operator to the current expression
+   * @param {String} operator 
+   */
+  addOperator = (operator) => {
+    if (this.state.expression[this.state.expression.length - 1] === "") return
+    this.setState((prevState) => ({
+      display: `${prevState.display}${operator}`,
+    }))
+    this.updateExpression(operator)
+  }
+
+  /**
    * Add the decimal operator to display
    */
   addDecimal = () => {
-    if (this.state.expression[this.state.expression.length - 1] === "") return
-    this.setFloatState()
-    this.setState((prevState) => ({
-      display: `${prevState.display}.`,
-    }))
-    this.updateExpression(".")
+    this.addOperator(".")
   }
 
   /**
    * Add the addition operator to display
    */
   addition = () => {
-    if (this.state.expression[this.state.expression.length - 1] === "") return
-    this.setState((prevState) => ({
-      display: `${prevState.display}+`,
-    }))
-    this.updateExpression("+")
+    this.addOperator("+")
   }
 
   /**
    * Add the subtraction operator to display
    */
   subtraction = () => {
-    if (this.state.expression[this.state.expression.length - 1] === "") return
-    this.setState((prevState) => ({
-      display: `${prevState.display}-`,
-    }))
-    this.updateExpression("-")
+    this.addOperator("-")
   }
 
   /**
    * Add the multiplication operator to display
    */
   multiplication = () => {
-    if (this.state.expression[this.state.expression.length - 1] === "") return
-    this.setState((prevState) => ({
-      display: `${prevState.display}*`,
-    }))
-    this.updateExpression("*")
+    this.addOperator("*")
   }
 
   /**
    * Add the division operator to display
    */
   division = () => {
-    if (this.state.expression[this.state.expression.length - 1] === "") return
-    this.setState((prevState) => ({
-      display: `${prevState.display}/`,
-    }))
-    this.updateExpression("/")
+    this.addOperator("/")
   }
 
   /**
