@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "96ecbabc6609890e4834f454bb77090d",
+    "revision": "67cb3baf1a9903d23d0fb1562dd05629",
     "url": "/win98-calculator/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/win98-calculator/static/css/2.93dac48e.chunk.css"
   },
   {
-    "revision": "6f60a8737c34f22046c8",
+    "revision": "31e977a42c53993a5042",
     "url": "/win98-calculator/static/css/main.bf7d0126.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/win98-calculator/static/js/2.59f8ab07.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "6f60a8737c34f22046c8",
-    "url": "/win98-calculator/static/js/main.906e4cec.chunk.js"
+    "revision": "31e977a42c53993a5042",
+    "url": "/win98-calculator/static/js/main.e215588a.chunk.js"
   },
   {
     "revision": "e0e86643dd9b58e5e712",
